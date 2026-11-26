@@ -32,22 +32,15 @@ class _GameDetailPageState extends State<GameDetailPage> {
       appBar: AppBar(
         title: const Text('Detalhes do jogo'),
       ),
-
       body: Obx(() {
         if (controller.isDetailLoading.value) {
           return const Center(
-            child: CircularProgressIndicator(),
-          );
+            child: CircularProgressIndicator(),);
         }
-
         final detail = controller.gameDetail.value;
-
         if (detail == null || detail.id != widget.game.id) {
           return const Center(
-            child: Text('Não foi possível carregar o jogo.'),
-          );
-        }
-
+            child: Text('Não foi possível carregar o jogo.'),);}
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -68,9 +61,7 @@ class _GameDetailPageState extends State<GameDetailPage> {
                   );
                 },
               ),
-
               const SizedBox(height: 16),
-
               Text(
                 detail.title,
                 style: const TextStyle(
@@ -78,9 +69,7 @@ class _GameDetailPageState extends State<GameDetailPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               const SizedBox(height: 16),
-
               const Text(
                 'Sobre o jogo',
                 style: TextStyle(
@@ -88,20 +77,15 @@ class _GameDetailPageState extends State<GameDetailPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               const SizedBox(height: 8),
               Text(detail.description),
-
               const SizedBox(height: 20),
-
               Text('Gênero: ${detail.genre}'),
               Text('Plataforma: ${detail.platform}'),
               Text('Desenvolvedora: ${detail.developer}'),
               Text('Publicadora: ${detail.publisher}'),
               Text('Data de lançamento: ${detail.releaseDate}'),
-
               const SizedBox(height: 20),
-
               const Text(
                 'Requisitos mínimos',
                 style: TextStyle(
@@ -109,12 +93,9 @@ class _GameDetailPageState extends State<GameDetailPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               const SizedBox(height: 8),
               Text(detail.minimumSystemRequirements),
-
               const SizedBox(height: 20),
-
               if (detail.gameUrl.isNotEmpty)
                 ElevatedButton.icon(
                   onPressed: () async {
@@ -129,17 +110,12 @@ class _GameDetailPageState extends State<GameDetailPage> {
                   icon: const Icon(Icons.open_in_new),
                   label: const Text('Acessar jogo'),
                 ),
-
               const SizedBox(height: 12),
-
               Obx(() {
                 final isFavorite =
                 controller.isFavorite(widget.game.id);
-
                 return ElevatedButton.icon(
-                  onPressed: () {
-                    controller.toggleFavorite(widget.game);
-                  },
+                  onPressed: () {controller.toggleFavorite(widget.game);},
                   icon: Icon(
                     isFavorite
                         ? Icons.favorite

@@ -26,7 +26,6 @@ class GameController extends GetxController {
     fetchGames();
   }
 
-  // Listar jogos e aplicar filtros
   Future<void> fetchGames() async {
     try {
       isLoading.value = true;
@@ -41,8 +40,7 @@ class GameController extends GetxController {
       if (response.statusCode == 200 && response.body is List) {
         games.assignAll(
           (response.body as List).map(
-                (json) => GameModel.fromJson(json),
-          ),
+                (json) => GameModel.fromJson(json),),
         );
       } else {
         errorMessage.value = 'Não foi possível carregar os jogos.';
@@ -54,7 +52,6 @@ class GameController extends GetxController {
     }
   }
 
-  // Busca local pelo nome
   List<GameModel> get filteredGames {
     if (searchQuery.value.isEmpty) {
       return games;
@@ -67,7 +64,6 @@ class GameController extends GetxController {
     }).toList();
   }
 
-  // Buscar detalhes pela API
   Future<void> fetchGameDetails(int id) async {
     try {
       isDetailLoading.value = true;
@@ -89,7 +85,6 @@ class GameController extends GetxController {
     }
   }
 
-  // Adicionar ou remover favoritos
   void toggleFavorite(GameModel game) {
     final exists = favorites.any((item) => item.id == game.id);
 
@@ -110,7 +105,6 @@ class GameController extends GetxController {
     favorites.removeWhere((game) => game.id == id);
   }
 
-  // Limpar filtros
   void clearFilters() {
     selectedCategory.value = 'all';
     selectedPlatform.value = 'all';

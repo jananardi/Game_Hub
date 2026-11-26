@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../models/game_model.dart';
 
@@ -34,10 +33,7 @@ class GameCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
                 errorBuilder: (context, error, stackTrace) {
-                  return const Center(
-                    child: Icon(Icons.image_not_supported),
-                  );
-                },
+                  return const Center(child: Icon(Icons.image_not_supported),);},
               ),
             ),
             Padding(
@@ -51,9 +47,7 @@ class GameCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                      fontWeight: FontWeight.bold,),),
                   const SizedBox(height: 6),
                   Text('Gênero: ${game.genre}'),
                   Text('Plataforma: ${game.platform}'),

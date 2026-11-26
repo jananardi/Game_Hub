@@ -30,10 +30,6 @@ class GameService extends GetConnect {
 
     final response = await get('/games', query: parameters);
 
-    print('STATUS: ${response.statusCode}');
-    print('ERRO: ${response.statusText}');
-    print('RESPOSTA: ${response.body}');
-
     return response;
   }
 

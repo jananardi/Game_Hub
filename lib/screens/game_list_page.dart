@@ -15,29 +15,20 @@ class GameListPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Game Hub',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: const Text('Game Hub', style: TextStyle(fontWeight: FontWeight.bold),),
         actions: [
           IconButton(
             icon: const Icon(Icons.favorite),
-            onPressed: () {
-              Get.to(() => const FavoritePage());
-            },
+            onPressed: () {Get.to(() => const FavoritePage());},
           ),
         ],
       ),
-
       body: Column(
         children: [
-          // Busca
           Padding(
             padding: const EdgeInsets.all(12),
             child: TextField(
-              onChanged: (value) {
-                controller.searchQuery.value = value;
-              },
+              onChanged: (value) {controller.searchQuery.value = value;},
               decoration: const InputDecoration(
                 hintText: 'Buscar jogo pelo nome...',
                 prefixIcon: Icon(Icons.search),
@@ -45,8 +36,6 @@ class GameListPage extends StatelessWidget {
               ),
             ),
           ),
-
-          // Filtros
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
@@ -58,8 +47,7 @@ class GameListPage extends StatelessWidget {
                         value: controller.selectedPlatform.value,
                         decoration: const InputDecoration(
                           labelText: 'Plataforma',
-                          border: OutlineInputBorder(),
-                        ),
+                          border: OutlineInputBorder(),),
                         items: const [
                           DropdownMenuItem(
                             value: 'all',
@@ -77,8 +65,7 @@ class GameListPage extends StatelessWidget {
                         onChanged: (value) {
                           if (value != null) {
                             controller.selectedPlatform.value = value;
-                            controller.fetchGames();
-                          }
+                            controller.fetchGames();}
                         },
                       )),
                     ),
@@ -122,9 +109,7 @@ class GameListPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 10),
-
                 Row(
                   children: [
                     Expanded(
@@ -170,10 +155,7 @@ class GameListPage extends StatelessWidget {
               ],
             ),
           ),
-
           const SizedBox(height: 8),
-
-          // Listagem
           Expanded(
             child: Obx(() {
               if (controller.isLoading.value) {
@@ -181,7 +163,6 @@ class GameListPage extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
-
               if (controller.errorMessage.value.isNotEmpty) {
                 return Center(
                   child: Column(
@@ -196,27 +177,22 @@ class GameListPage extends StatelessWidget {
                   ),
                 );
               }
-
               final games = controller.filteredGames;
-
               if (games.isEmpty) {
                 return const Center(
                   child: Text('Nenhum jogo encontrado.'),
                 );
               }
-
               return RefreshIndicator(
                 onRefresh: controller.fetchGames,
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     final screenWidth = constraints.maxWidth;
-
                     final crossAxisCount = screenWidth >= 1000
                         ? 3
                         : screenWidth >= 600
                         ? 2
                         : 1;
-
                     return GridView.builder(
                       padding: const EdgeInsets.all(12),
                       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -228,7 +204,6 @@ class GameListPage extends StatelessWidget {
                       itemCount: games.length,
                       itemBuilder: (context, index) {
                         final game = games[index];
-
                         return GameCard(
                           game: game,
                           onTap: () {
